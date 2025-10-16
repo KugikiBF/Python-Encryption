@@ -16,29 +16,44 @@ def caesar(text,key=13):
             encrypted_text+=key_char
     return (encrypted_text.capitalize())
 
+def lines(width=40):
+    print("-"*width)
+
+def title(text):
+    lines()
+    print(text.upper().center(40))
+    lines()
 
 def vigenere (key='python',direction=1):
-    alphabet="abcdefghijklmnopqrstuvwxyz"
+    alphabet="ABCDEFGHIJQLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
     encrypted_text=""
     key_index=0
     while True:
-        text=str(input("Digite a palavra a ser criptografada: "))
-        for char in text.lower().strip():
+        title("vigenere system") 
+        text=str(input("Digite a palavra a ser criptografada: "))  
+        decrypt=input("\nQuer decriptar? [S/N] ").upper().strip()
+        while decrypt not in "SsNn":  
+            decrypt=input("Erro: Digite um valor válido! [S/N] ".upper().strip())
+        for char in text.strip():
             if not char.isalnum():
                 encrypted_text+=char
             else:
                 text_index=alphabet.find(char)
                 new_key_index=alphabet.find(key[key_index%len(key)])
                 key_index+=1
-                encrypt=(text_index+new_key_index*direction)%len(alphabet)
+                if decrypt == "N":
+                    encrypt=(text_index+new_key_index*direction)%len(alphabet)
+                else:
+                    encrypt=(text_index+new_key_index*-1)%len(alphabet)
                 encrypted_text+=alphabet[encrypt]
-                print(f"Ela foi criptografada como: {encrypted_text}")
-            sleep(0.5)
-            print("Palavra Criptografada com sucesso!")
-            sleep(0.5)
-            print(f"Ela foi criptografada como: {encrypted_text}")
-            cont=input("Voce quer continuar? [S/N] ").upper().strip()
-            while cont not in "SsNn":  
-                cont=input("Erro: Digite um valor válido! [S/N] ")
+        title("Palavra Criptografada com sucesso!")
+        sleep(0.5)
+        print(f"Ela foi criptografada como: {encrypted_text}")
+        lines()
+        sleep(0.8)
+        encrypted_text=""
+        cont=input("Voce quer continuar? [S/N] ").upper().strip()
         if cont in "Nn":
             break
+        while cont not in "SsNn":  
+            cont=input("Erro: Digite um valor válido! [S/N] ".upper().strip())

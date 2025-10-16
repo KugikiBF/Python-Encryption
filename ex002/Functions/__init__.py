@@ -39,7 +39,9 @@ def main():
         if choice == 1:
             title("add expense")
             amount=float(input("Enter amount: "))
-            category=input("Enter category:\033[34m \033[m").capitalize()
+            category=input("Enter category:\033[34m ").capitalize()
+            category=f"\033[34m{category}\033[m"
+            print("\033[m")
             add_expense(amount,category,expenses)
             sleep(0.3)
         elif choice == 2:
@@ -52,8 +54,9 @@ def main():
             sleep(1)
         elif choice == 4:
             title("category filter")
-            category=input("Enter category to search: ").capitalize()
-            print()
+            category=input("Enter category to search:\033[34m ").capitalize()
+            print("\033[m")
+            category=f"\033[34m{category}\033[m"
             print(f"{category} expenses find:")
             print()
             filtered_expenses=filter_category(category,expenses)
