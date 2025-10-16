@@ -10,6 +10,14 @@ def show_expenses(lists):
 
 def filter_category(category, lists):
     return (filter(lambda search: search['category']==category,lists))
+def large(text):
+    width=len(text)+4
+    print(text*width)
+
+def title(text):
+    large("-")
+    print(f"{text}")
+    large("-")
 
 def main():
     from time import sleep
@@ -29,7 +37,7 @@ def main():
                 print("Error: Invalid Type.")
         if choice == 1:
             amount=float(input("Enter amount: "))
-            category=input("Enter category: ")
+            category=input("Enter category: ").capitalize()
             add_expense(amount,category,expenses)
             sleep(0.3)
         elif choice == 2:
@@ -37,7 +45,8 @@ def main():
             show_expenses(expenses)
             sleep(1)
         elif choice == 3:
-            print(f"\nTotal Expenses: {total_expense(expenses)}")
+            title("  Total:")
+            (f"Total Expenses: {total_expense(expenses)}")
             sleep(1)
         elif choice == 4:
             category=input("Enter category to search: ")
