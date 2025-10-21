@@ -1,2 +1,0 @@
-from Functions import *
-main()
